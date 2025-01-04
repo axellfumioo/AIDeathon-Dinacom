@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenCycle UI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
@@ -16,7 +16,7 @@
         /* Custom Background Curve */
         .bg-curve {
             background: linear-gradient(to top, #064e3b 40%, transparent 80%);
-            clip-path: ellipse(100% 30% at 50% 100%);
+            clip-path: ellipse(100% 32% at 50% 100%);
         }
     </style>
 </head>
@@ -37,8 +37,8 @@
         </div>
 
         <!-- Illustration -->
-        <div class="w-full max-w-md">
-            <img src="illustration.png" alt="Illustration" class="w-full drop-shadow-md">
+        <div class="flex w-full max-w-md justify-center items-center mx-auto">
+            <img src="{{asset('assets/img/illustration/Garbage-Illustration.png')}}" alt="Illustration" class="w-1/2 drop-shadow-md">
         </div>
 
         <!-- Main Text -->
