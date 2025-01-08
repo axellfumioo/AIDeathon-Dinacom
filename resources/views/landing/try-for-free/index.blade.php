@@ -85,11 +85,11 @@
                     <p class="text-sm text-green-600 mt-1">Bergabunglah dengan komunitas kami dengan membuat akunmu!</p>
                 </div>
 
-                <form>
+                <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <!-- Input Field -->
                     <div class="w-full">
-                        <input type="hidden" id="fullname" name="fullname" value="">
+                        <input type="hidden" id="name" name="name" value="">
                         <div class="relative py-2">
                             <i class="fas fa-at absolute left-4 top-1/2 transform -translate-y-1/2 text-green-500"></i>
                             <input type="text" name="email" placeholder="Your Email"
@@ -122,7 +122,7 @@
     <script>
         // Ambil elemen-elemen
         const inputValue = document.getElementById('inputValue');
-        const inputName = document.getElementById('fullname');
+        const inputName = document.getElementById('name');
         const submitButton = document.getElementById('submitButton');
         const resultContainer = document.getElementById('result-container');
         const inputContainer = document.getElementById('input-container');

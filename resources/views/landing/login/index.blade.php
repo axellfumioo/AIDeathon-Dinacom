@@ -54,7 +54,7 @@
                 <h1 class="text-2xl font-bold text-green-700">Welcome back</h1>
                 <p class="text-sm text-green-600 mt-1">It's good to see you back! Please log in.</p>
             </div>
-            <form>
+            <form method="POST" action="{{ url('/login') }}">
                 @csrf
                 <!-- Input Field -->
                 <div class="w-full">
