@@ -53,15 +53,15 @@
         </div>
 
         <!-- Buttons -->
-        <div class="flex flex-col items-center w-full max-w-sm space-y-4">
-            <button
+        <div class="flex flex-col items-center w-full max-w-sm space-y-4 text-center">
+            <a href="{{ url('/try-for-free') }}"
                 class="w-full py-3 text-sm font-semibold text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 transform hover:scale-105 transition-transform duration-300">
                 Coba GreenCycle gratis
-            </button>
-            <button
+            </a>
+            <a href="{{ url('/login') }}"
                 class="w-full py-3 text-sm font-semibold text-green-600 bg-white border border-green-600 rounded-lg shadow-md hover:bg-gray-100 transform hover:scale-105 transition-transform duration-300">
                 Sudah punya akun
-            </button>
+            </a>
         </div>
 
         <!-- Footer Link -->

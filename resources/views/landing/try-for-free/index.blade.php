@@ -86,6 +86,7 @@
                 </div>
 
                 <form>
+                    @csrf
                     <!-- Input Field -->
                     <div class="w-full">
                         <input type="hidden" id="fullname" name="fullname" value="">
@@ -113,7 +114,7 @@
 
             <!-- Footer -->
             <p class="text-xs text-green-800">
-                Already have an account? <a href="#"
+                Already have an account? <a href="{{ url('/login') }}"
                     class="text-green-400 underline hover:text-green-300">Login</a>
             </p>
         </div>

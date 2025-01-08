@@ -25,3 +25,12 @@ Route::get('/edu', function () {
 Route::get('/profile', function () {
     return view('app.profile.index');
 });
+Route::get('/scan', function () {
+    return view('app.scan.index');
+});
+Route::get('/profile/activity', function () {
+    return view('app.profile.activity.index');
+});
+Route::get('/profile/edit', function () {
+    return view('app.profile.edit.index');
+});

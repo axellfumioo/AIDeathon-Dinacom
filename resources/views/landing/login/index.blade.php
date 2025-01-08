@@ -54,30 +54,31 @@
                 <h1 class="text-2xl font-bold text-green-700">Welcome back</h1>
                 <p class="text-sm text-green-600 mt-1">It's good to see you back! Please log in.</p>
             </div>
-
-            <!-- Input Field -->
-            <div class="w-full">
-                <div class="relative py-2">
-                    <i class="fas fa-at absolute left-4 top-1/2 transform -translate-y-1/2 text-green-500"></i>
-                    <input type="text" placeholder="Your Email"
-                        class="w-full py-3 pl-12 pr-4 text-sm text-green-800 bg-green-100 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-green-300">
+            <form>
+                @csrf
+                <!-- Input Field -->
+                <div class="w-full">
+                    <div class="relative py-2">
+                        <i class="fas fa-at absolute left-4 top-1/2 transform -translate-y-1/2 text-green-500"></i>
+                        <input type="text" placeholder="Your Email"
+                            class="w-full py-3 pl-12 pr-4 text-sm text-green-800 bg-green-100 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-green-300">
+                    </div>
+                    <div class="relative py-2">
+                        <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-green-500"></i>
+                        <input type="password" placeholder="Your Password"
+                            class="w-full py-3 pl-12 pr-4 text-sm text-green-800 bg-green-100 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-green-300">
+                    </div>
                 </div>
-                <div class="relative py-2">
-                    <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-green-500"></i>
-                    <input type="password" placeholder="Your Password"
-                        class="w-full py-3 pl-12 pr-4 text-sm text-green-800 bg-green-100 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-green-300">
-                </div>
-            </div>
 
-            <!-- Submit Button -->
-            <button
-                class="w-full py-3 text-sm font-semibold text-white bg-gradient-to-r from-green-500 to-green-700 rounded-lg shadow-lg hover:from-green-600 hover:to-green-800 transform hover:scale-105 transition-transform duration-300">
-                Continue
-            </button>
-
+                <!-- Submit Button -->
+                <button
+                    class="w-full py-3 text-sm font-semibold text-white bg-gradient-to-r from-green-500 to-green-700 rounded-lg shadow-lg hover:from-green-600 hover:to-green-800 transform hover:scale-105 transition-transform duration-300">
+                    Continue
+                </button>
+            </form>
             <!-- Footer -->
             <p class="text-xs text-green-800">
-                Doesn't have an account? <a href="#"
+                Doesn't have an account? <a href="{{ url('/try-for-free') }}"
                     class="text-green-400 underline hover:text-green-300">Register</a>
             </p>
         </div>
