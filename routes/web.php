@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ViewController;
 use App\Http\Middleware\CheckAuthenticated;
+use App\Http\Controllers\AIController;
 
 Route::get('/', function () {
     return view('landing.welcome');
@@ -12,15 +14,10 @@ Route::any('try-for-free', [AuthController::class, 'register'])->name('register'
 Route::any('login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware([CheckAuthenticated::class])->group(function () {
-    Route::get('/home', function () {
-        return view('app.index');
-    });
-    Route::get('/leaderboard', function () {
-        return view('app.leadeboard.index');
-    });
-    Route::get('/edu', function () {
-        return view('app.education.index');
-    });
+    Route::get('home', [ViewController::class, 'home'])->name('home');
+    Route::get('edu', [ViewController::class, 'edu'])->name('edu');
+    Route::get('leaderboard', [ViewController::class, 'leaderboard'])->name('leaderboard');
+    Route::get('edu', [ViewController::class, 'edu'])->name('edu');
     Route::get('/profile', function () {
         return view('app.profile.index');
     });
@@ -34,3 +31,4 @@ Route::middleware([CheckAuthenticated::class])->group(function () {
         return view('app.profile.edit.index');
     });
 });
+Route::post('upload', [AIController::class, 'handleUpload'])->name('upload');

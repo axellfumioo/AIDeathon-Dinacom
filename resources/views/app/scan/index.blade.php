@@ -40,22 +40,105 @@
 <body class="bg-gray-100">
     <!-- Wrapper Fullscreen -->
     <div
-        class="min-h-screen w-full flex flex-col items-center justify-between bg-gray-200 sm:max-w-md sm:mx-auto sm:rounded-lg sm:shadow-lg overflow-hidden">
+        class="min-h-screen w-full flex flex-col items-center justify-between bg-gray-200 sm:max-w-md sm:mx-auto sm:rounded-lg sm:shadow-lg overflow-hidden relative">
         <!-- Kamera Placeholder -->
         <div
-            class="flex items-center justify-between w-full h-16 bg-[#16423C] font-semibold text-lg rounded-b-lg text-white px-4">
-            <a href="{{url('/home')}}" class="bg-[#6A9C89] px-2 py-1 rounded-md"><i class="fa-solid fa-chevron-left"></i></a>
+            class="flex items-center justify-between w-full h-16 bg-[#16423C] font-semibold text-lg rounded-b-lg text-white px-4 relative z-10">
+            <a href="{{ url('/home') }}" class="bg-[#6A9C89] px-2 py-1 rounded-md"><i
+                    class="fa-solid fa-chevron-left"></i></a>
             <span class="flex-1 text-center">SCAN</span>
             <div class="w-6"></div> <!-- Placeholder to balance the button on the left -->
         </div>
 
+        <!-- Camera Container -->
+        <div id="cameraContainer" class="absolute inset-0 z-0 flex items-center justify-center bg-black">
+            <video id="vid" class="h-full w-full object-contain" autoplay muted></video>
+        </div>
+
         <!-- Bagian Scan -->
-        <div class="w-full bg-[#16423C] text-white text-center py-4 rounded-t-lg">
+        <div class="w-full bg-[#16423C] text-white text-center py-4 rounded-t-lg relative z-10">
             <p class="text-lg font-bold">Scan</p>
             <p class="text-sm">Untuk Mengetahui Jenis sampah organik dan anorganik</p>
-            <button class="mt-4 bg-[#6A9C89] text-white px-6 py-2 rounded-md">Capture</button>
+            <button id="captureBtn" class="mt-4 bg-[#D9D9D9] text-white w-16 h-16 rounded-full border-[#6A9C89] border-8"></button>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let video = document.getElementById("vid");
+            let captureBtn = document.getElementById("captureBtn");
+            let mediaDevices = navigator.mediaDevices;
+
+            let stream; // Variable to hold the video stream
+
+            // Start the camera feed automatically
+            mediaDevices
+                .getUserMedia({
+                    video: true,
+                    audio: false // No audio required for scanning
+                })
+                .then((mediaStream) => {
+                    stream = mediaStream;
+                    video.srcObject = mediaStream;
+                    video.play();
+                })
+                .catch((error) => {
+                    alert("Unable to access the camera: " + error.message);
+                });
+
+            // Capture button functionality
+            captureBtn.addEventListener("click", () => {
+                // Freeze the video by pausing it
+                video.pause();
+
+                // Create a canvas element to draw the video frame
+                let canvas = document.createElement("canvas");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                let context = canvas.getContext("2d");
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert the canvas to a Blob (image data)
+                canvas.toBlob((blob) => {
+                    if (!blob) {
+                        alert("Failed to capture the image.");
+                        return;
+                    }
+
+                    // Create a FormData object to send the blob to the API
+                    let formData = new FormData();
+                    formData.append("file", blob, "capture.jpg");
+
+                    // Upload to the API
+                    fetch("http://127.0.0.1:8000/upload", {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to upload the image.");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            // Check the API response
+                            if (data.status === "OK" && data.url) {
+                                // Redirect to the URL provided by the API
+                                window.location.href = data.url;
+                            } else {
+                                alert("Upload succeeded, but the response is invalid.");
+                                video.play(); // Resume the video if no valid URL is returned
+                            }
+                        })
+                        .catch((error) => {
+                            alert("Error uploading the image: " + error.message);
+                            video.play(); // Resume the video if the upload fails
+                        });
+                }, "image/jpeg");
+            });
+        });
+    </script>
 </body>
 
 </html>

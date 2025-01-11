@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('total_sampah')->default(0); // Kolom total sampah
+            $table->integer('sampah_organik')->default(0); // Kolom sampah organik
+            $table->integer('sampah_non_organik')->default(0); // Kolom sampah non-organik
+            $table->integer('sampah_lain_nya')->default(0); // Kolom sampah non-organik
             $table->rememberToken();
             $table->timestamps();
         });

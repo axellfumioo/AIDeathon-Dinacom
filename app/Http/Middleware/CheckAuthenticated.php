@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CheckAuthenticated
 {
@@ -17,6 +18,7 @@ class CheckAuthenticated
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
+            Alert::error('Gagal', 'Anda belum masuk!');
             return redirect()->route('login'); // Redirect to login if not authenticated
         }
 

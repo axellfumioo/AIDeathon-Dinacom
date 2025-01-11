@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenCycle - Welcome</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @vite('resources/css/app.css')
     <script src="https://kit.fontawesome.com/c1cbeb7f83.js" crossorigin="anonymous"></script>
     <style>
@@ -44,6 +45,7 @@
 </head>
 
 <body class="bg-green-50">
+    @include('sweetalert::alert')
 
     <!-- Background -->
     <div class="relative h-screen flex flex-col items-center justify-between">
@@ -87,7 +89,6 @@
 
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-                    <!-- Input Field -->
                     <div class="w-full">
                         <input type="hidden" id="name" name="name" value="">
                         <div class="relative py-2">

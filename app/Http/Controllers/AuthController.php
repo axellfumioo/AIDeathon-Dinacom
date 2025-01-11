@@ -10,62 +10,82 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class AuthController extends Controller
 {
     /**
-     * Write code on Method
+     * Handle login request
      *
-     * @return response()
+     * @param Request $request
+     * @return View|RedirectResponse
      */
-    public function login(Request $request): View
+    public function login(Request $request)
     {
-        if ($request == "POST") {
-            $request->validate([
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'password' => 'required|min:6'
+                'password' => 'required',
             ]);
 
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
+                Alert::success('Berhasil', 'Login berhasil!');
                 return redirect()->to('/home');
+            } else {
+                Alert::error('Gagal', 'Email atau kata sandi salah!');
             }
 
-            return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+            return redirect()->back();
         }
         return view('landing.login.index');
     }
 
     /**
-     * Write code on Method
+     * Handle registration request
      *
-     * @return response()
+     * @param Request $request
+     * @return View|RedirectResponse
      */
-    public function register(Request $request): View
+    public function register(Request $request)
     {
-        if ($request == "POST") {
-            $request->validate([
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:6',
             ]);
+
+            if ($validator->fails()) {
+                // Ambil semua pesan error dan gabungkan dengan bullet points
+                $errorMessage = "<ul>";
+                foreach ($validator->errors()->all() as $error) {
+                    $errorMessage .= "<li>{$error}</li>";
+                }
+                $errorMessage .= "</ul>";
+
+                // Kirimkan pesan ke swal2
+                Alert::html('Gagal!', $errorMessage, 'error');
+                return redirect()->back();
+            }
 
             $data = $request->all();
             $user = $this->create($data);
 
             Auth::login($user);
 
-            header("Location: google.com");
+            return redirect()->to('/home')->with('success', 'Great! You have Successfully logged in');
         }
+
         return view('landing.try-for-free.index');
     }
 
     /**
-     * Write code on Method
+     * Show dashboard
      *
-     * @return response()
+     * @return View|RedirectResponse
      */
     public function dashboard()
     {
@@ -73,15 +93,16 @@ class AuthController extends Controller
             return view('app.index');
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect()->route('login')->withErrors('Opps! You do not have access');
     }
 
     /**
-     * Write code on Method
+     * Create a new user instance
      *
-     * @return response()
+     * @param array $data
+     * @return User
      */
-    public function create(array $data)
+    protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
@@ -91,14 +112,14 @@ class AuthController extends Controller
     }
 
     /**
-     * Write code on Method
+     * Handle logout request
      *
-     * @return response()
+     * @return RedirectResponse
      */
     public function logout(): RedirectResponse
     {
         Auth::logout();
 
-        return Redirect('login');
+        return redirect()->route('login');
     }
 }

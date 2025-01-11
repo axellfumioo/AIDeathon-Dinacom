@@ -36,6 +36,7 @@
 </head>
 
 <body class="bg-green-50">
+    @include('sweetalert::alert')
 
     <!-- Background -->
     <div class="relative h-screen flex flex-col items-center justify-between">
@@ -54,18 +55,18 @@
                 <h1 class="text-2xl font-bold text-green-700">Welcome back</h1>
                 <p class="text-sm text-green-600 mt-1">It's good to see you back! Please log in.</p>
             </div>
-            <form method="POST" action="{{ url('/login') }}">
+            <form class="w-full" method="POST" action="{{ url('/login') }}">
                 @csrf
                 <!-- Input Field -->
                 <div class="w-full">
                     <div class="relative py-2">
                         <i class="fas fa-at absolute left-4 top-1/2 transform -translate-y-1/2 text-green-500"></i>
-                        <input type="text" placeholder="Your Email"
+                        <input type="text" name="email" placeholder="Your Email"
                             class="w-full py-3 pl-12 pr-4 text-sm text-green-800 bg-green-100 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-green-300">
                     </div>
                     <div class="relative py-2">
                         <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-green-500"></i>
-                        <input type="password" placeholder="Your Password"
+                        <input type="password" name="password" placeholder="Your Password"
                             class="w-full py-3 pl-12 pr-4 text-sm text-green-800 bg-green-100 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-green-300">
                     </div>
                 </div>
