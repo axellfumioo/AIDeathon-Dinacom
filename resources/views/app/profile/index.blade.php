@@ -12,7 +12,8 @@
         <header class="bg-[#16423C] text-white py-4 px-6 flex items-center justify-between shadow-md">
             <h1 class="text-lg font-semibold">Your Profile</h1>
             <div class="flex-1"></div> <!-- This creates space on the left -->
-            <a class="bg-gray-200 rounded-lg text-[#16423C] px-3 py-1 ml-auto" href="{{ url('/profile/edit') }}">Edit</a>
+            <a class="bg-gray-200 rounded-lg text-[#16423C] px-3 py-1 ml-auto" href="{{ url('/profile/edit') }} "
+                disabled>Edit</a>
         </header>
 
         <!-- Top 3 Section -->
@@ -23,10 +24,11 @@
                 <div class="relative flex flex-col items-center">
                     <div
                         class="w-32 h-32 bg-yellow-400 rounded-full overflow-hidden shadow-xl border-4 border-white animate-glow ">
-                        <img src="https://via.placeholder.com/100" alt="User 1" class="w-full h-full object-cover">
+                        <img src="https://api.dicebear.com/9.x/pixel-art/svg?seed={{ $user->name }}" alt="User 1"
+                            class="w-full h-full object-cover">
                     </div>
-                    <p class="mt-2 text-xl font-bold">Ambatr</p>
-                    <p class="text-sm font-light">ambatr@mail.com</p>
+                    <p class="mt-2 text-xl font-bold">{{ $user->name }}</p>
+                    <p class="text-sm font-light">{{ $user->email }}</p>
                 </div>
             </div>
         </section>
@@ -43,6 +45,7 @@
                 <img src="https://via.placeholder.com/100" alt="Badge" class="w-32 px-2">
                 <img src="https://via.placeholder.com/100" alt="Badge" class="w-32 px-2">
             </div>
+            <a class="ml-2 text-xs text-red-400">Data ini hanya dummy, karena deadline sangat dekat</a>
         </section>
 
 

@@ -22,9 +22,11 @@
     <meta property="og:title" content="GreenCycle - Multi App">
     <meta property="og:description" content="GreenCycle - Multi App">
     <script src="https://kit.fontawesome.com/c1cbeb7f83.js" crossorigin="anonymous"></script>
+    @livewireStyles
 </head>
 
 @include('sweetalert::alert')
+@livewireScripts
 @yield('content')
 
 @yield('script')

@@ -17,17 +17,19 @@
         <section class="relative text-white pb-10 pt-8 shadow-lg">
             <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b bg-[#16423C] z-0"></div>
             <div class="flex justify-around items-end relative z-10">
-                <!-- Rank #2 -->
-                <div class="relative flex flex-col items-center hover:scale-105 transition-transform duration-300">
-                    <div class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden shadow-lg border-4 border-white">
-                        <img src="https://api.dicebear.com/9.x/pixel-art/svg?seed={{ $podium_leaderboard[1]->name }}"
-                            alt="User 2" class="w-full h-full object-cover">
+                @if (isset($podium_leaderboard[1]->name))
+                    <!-- Rank #2 -->
+                    <div class="relative flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                        <div class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden shadow-lg border-4 border-white">
+                            <img src="https://api.dicebear.com/9.x/pixel-art/svg?seed={{ $podium_leaderboard[1]->name }}"
+                                alt="User 2" class="w-full h-full object-cover">
+                        </div>
+                        <p class="absolute -top-4 bg-gray-100 text-gray-800 font-bold px-2 py-1 rounded-full shadow-lg">#2
+                        </p>
+                        <p class="mt-6 text-xl font-bold">{{ $podium_leaderboard[1]->name }}</p>
+                        <p class="text-sm font-light">{{ $podium_leaderboard[1]->total_sampah }} Sampah</p>
                     </div>
-                    <p class="absolute -top-4 bg-gray-100 text-gray-800 font-bold px-2 py-1 rounded-full shadow-lg">#2</p>
-                    <p class="mt-6 text-xl font-bold">{{ $podium_leaderboard[1]->name }}</p>
-                    <p class="text-sm font-light">{{ $podium_leaderboard[1]->total_sampah }} Sampah</p>
-                </div>
-
+                @endif
                 <!-- Rank #1 -->
                 <div class="relative flex flex-col items-center hover:scale-110 transition-transform duration-300">
                     <div
@@ -39,17 +41,19 @@
                     <p class="mt-6 text-xl font-bold">{{ $podium_leaderboard[0]->name }}</p>
                     <p class="text-sm font-light">{{ $podium_leaderboard[0]->total_sampah }} Sampah</p>
                 </div>
-
-                <!-- Rank #3 -->
-                <div class="relative flex flex-col items-center hover:scale-105 transition-transform duration-300">
-                    <div class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden shadow-lg border-4 border-white">
-                        <img src="https://api.dicebear.com/9.x/pixel-art/svg?seed={{ $podium_leaderboard[2]->name }}"
-                            alt="User 3" class="w-full h-full object-cover">
+                @if (isset($podium_leaderboard[2]->name))
+                    <!-- Rank #3 -->
+                    <div class="relative flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                        <div class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden shadow-lg border-4 border-white">
+                            <img src="https://api.dicebear.com/9.x/pixel-art/svg?seed={{ $podium_leaderboard[2]->name }}"
+                                alt="User 3" class="w-full h-full object-cover">
+                        </div>
+                        <p class="absolute -top-4 bg-gray-100 text-gray-800 font-bold px-2 py-1 rounded-full shadow-lg">#3
+                        </p>
+                        <p class="mt-6 text-xl font-bold">{{ $podium_leaderboard[2]->name }}</p>
+                        <p class="text-sm font-light">{{ $podium_leaderboard[2]->total_sampah }} Sampah</p>
                     </div>
-                    <p class="absolute -top-4 bg-gray-100 text-gray-800 font-bold px-2 py-1 rounded-full shadow-lg">#3</p>
-                    <p class="mt-6 text-xl font-bold">{{ $podium_leaderboard[2]->name }}</p>
-                    <p class="text-sm font-light">{{ $podium_leaderboard[2]->total_sampah }} Sampah</p>
-                </div>
+                @endif
             </div>
         </section>
 

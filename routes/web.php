@@ -17,10 +17,9 @@ Route::middleware([CheckAuthenticated::class])->group(function () {
     Route::get('home', [ViewController::class, 'home'])->name('home');
     Route::get('edu', [ViewController::class, 'edu'])->name('edu');
     Route::get('leaderboard', [ViewController::class, 'leaderboard'])->name('leaderboard');
-    Route::get('edu', [ViewController::class, 'edu'])->name('edu');
-    Route::get('/profile', function () {
-        return view('app.profile.index');
-    });
+    Route::get('community', [ViewController::class, 'community'])->name('community');
+    Route::get('trash', [ViewController::class, 'trash'])->name('trash');
+    Route::get('profile', [ViewController::class, 'profile'])->name('profile');
     Route::get('/scan', function () {
         return view('app.scan.index');
     });

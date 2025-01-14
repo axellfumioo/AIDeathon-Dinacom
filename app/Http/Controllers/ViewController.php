@@ -33,80 +33,19 @@ class ViewController extends Controller
 
         return view('app.leaderboard.index', compact('user', 'podium_leaderboard', 'leaderboard'));
     }
-    public function edu()
+    public function community()
     {
-        // List ID video yang ingin ditampilkan
-        $videoIds = [
-            'dQw4w9WgXcQ', // Contoh video 1
-            '9bZkp7q19f0', // Contoh video 2
-            'LXb3EKWsInQ', // Contoh video 3
-            'YHTdbIpMyHw', // Contoh video 3
-        ];
-
-        // Ambil data video dari YouTube API
-        $videos = collect($videoIds)->mapWithKeys(function ($id) {
-            return [$id => Cache::remember("video_details_{$id}", 120, function () use ($id) {
-                $client = new \GuzzleHttp\Client();
-                $response = $client->get('https://www.googleapis.com/youtube/v3/videos', [
-                    'query' => [
-                        'part' => 'snippet,statistics,contentDetails',
-                        'id' => $id,
-                        'key' => $this->apiKey,
-                    ]
-                ]);
-
-                $data = json_decode($response->getBody(), true);
-
-                if (!empty($data['items'][0])) {
-                    $video = $data['items'][0];
-                    return [
-                        'id' => $id,
-                        'title' => $video['snippet']['title'],
-                        'thumbnails' => $video['snippet']['thumbnails']['medium']['url'],
-                        'description' => $this->shortenDescription($video['snippet']['description']),
-                        'duration' => $this->convertDuration($video['contentDetails']['duration']),
-                        'views' => $this->formatViews($video['statistics']['viewCount']),
-                        'likes' => $video['statistics']['likeCount'] ?? 0,
-                    ];
-                }
-
-                return null;
-            })];
-        });
-
-        // Kirim data ke view
-        return view('app.education.index', compact('videos'));
+        $user = Auth::user();
+        return View::make('app.community.index', ['user' => $user]);
     }
-
-
-    private function convertDuration($duration)
+    public function trash()
     {
-        $interval = new \DateInterval($duration);
-        return $interval->format('%H:%I:%S');
+        $user = Auth::user();
+        return View::make('app.trash.index', ['user' => $user]);
     }
-    private function shortenDescription($description, $maxChars = 128)
+    public function profile()
     {
-        if (strlen($description) > $maxChars) {
-            return substr($description, 0, $maxChars) . '...';
-        }
-
-        return $description;
-    }
-    private function formatViews($view)
-    {
-        if ($view < 1000) {
-            // Anything less than a million
-            $view = number_format($view);
-        } else if ($view < 1000000) {
-            // Anything less than a billion
-            $view = number_format($view / 1000000, 1) . 'K';
-        } else if ($view < 1000000000) {
-            // Anything less than a billion
-            $view = number_format($view / 1000000, 1) . 'M';
-        } else {
-            // At least a billion
-            $view = number_format($view / 1000000000, 1) . 'B';
-        }
-        return $view;
+        $user = Auth::user();
+        return View::make('app.profile.index', ['user' => $user]);
     }
 }

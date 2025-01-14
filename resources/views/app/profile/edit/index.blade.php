@@ -64,6 +64,7 @@
                 <a>Profile Picture</a>
                 <input class="rounded-lg h-8 border border-gray-300 p-2" type="text">
             </div>
+            <a class="text-xs text-red-400">Fitur ini belum tersedia, karena deadline sangat dekat</a>
             <div class="flex justify-center mt-4 bg-[#16423C] text-white rounded-lg p-2">
                 <button>Submit</button>
             </div>

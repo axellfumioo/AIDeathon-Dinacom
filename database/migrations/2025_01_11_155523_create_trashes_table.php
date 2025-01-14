@@ -15,10 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); // Assuming each billing address is linked to a user
             $table->string('trash_uuid');
+            $table->string('trash_image');
             $table->string('trash_name');
-            $table->enum('trash_type', ['organik', 'nonorganik', 'other']);
+            $table->string('trash_type');
             $table->string('description');
-            $table->string('message');
+            $table->string('dampak');
+            $table->string('cara_pengolahan');
+            $table->string('faq_1');
+            $table->string('faq_2');
+            $table->string('faq_3');
             $table->timestamps();
 
             // Foreign key constraint

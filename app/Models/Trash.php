@@ -12,10 +12,15 @@ class Trash extends Model
     protected $fillable = [
         'user_id',
         'trash_uuid',
+        'trash_image',
         'trash_name',
         'trash_type',
         'description',
-        'message',
+        'dampak',
+        'cara_pengolahan',
+        'faq_1',
+        'faq_2',
+        'faq_3',
     ];
 
     public function user()

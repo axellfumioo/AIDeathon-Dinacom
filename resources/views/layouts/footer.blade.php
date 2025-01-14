@@ -3,17 +3,17 @@
     <a class="flex flex-col items-center text-white" href="{{ url('/home') }}">
         <i class="fas fa-home text-lg"></i>
     </a>
-    <!-- Komunitas -->
-    <a class="flex flex-col items-center text-white" href="{{ url('/leaderboard') }}">
-        <i class="fas fa-ranking-star text-lg"></i>
+    <!-- Komuntias -->
+    <a class="flex flex-col items-center text-white" href="{{ url('/community') }}">
+        <i class="fas fa-comments text-lg"></i>
     </a>
     <!-- Kamera (Bigger Middle Circle Button) -->
     <a class="bg-[#6A9C89] py-4 px-5 rounded-full -mt-10 shadow-lg" href="{{ url('/scan') }}">
         <i class="fas fa-camera text-3xl text-white"></i>
     </a>
-    <!-- Riwayat -->
-    <a class="flex flex-col items-center text-white" href="{{ url('/edu') }}">
-        <i class="fas fa-graduation-cap text-lg"></i>
+    <!-- Leaderboard -->
+    <a class="flex flex-col items-center text-white" href="{{ url('/leaderboard') }}">
+        <i class="fas fa-ranking-star text-lg"></i>
     </a>
     <!-- Akun -->
     <a class="flex flex-col items-center text-white" href="{{ url('/profile') }}">
