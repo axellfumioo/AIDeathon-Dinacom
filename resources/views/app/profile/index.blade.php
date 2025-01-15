@@ -40,10 +40,10 @@
                 <h2 class="text-lg font-semibold text-gray-700">Badge</h2>
             </div>
             <div class="px-4 py-4 flex overflow-x-scroll">
-                <img src="https://via.placeholder.com/100" alt="Badge" class="w-32 px-2">
-                <img src="https://via.placeholder.com/100" alt="Badge" class="w-32 px-2">
-                <img src="https://via.placeholder.com/100" alt="Badge" class="w-32 px-2">
-                <img src="https://via.placeholder.com/100" alt="Badge" class="w-32 px-2">
+                <img src="https://pub-8d062d8afb634f118a518401f95053f2.r2.dev/badge.png" alt="Badge" class="w-32 px-2">
+                <img src="https://pub-8d062d8afb634f118a518401f95053f2.r2.dev/badge.png" alt="Badge" class="w-32 px-2">
+                <img src="https://pub-8d062d8afb634f118a518401f95053f2.r2.dev/badge.png" alt="Badge" class="w-32 px-2">
+                <img src="https://pub-8d062d8afb634f118a518401f95053f2.r2.dev/badge.png" alt="Badge" class="w-32 px-2">
             </div>
             <a class="ml-2 text-xs text-red-400">Data ini hanya dummy, karena deadline sangat dekat</a>
         </section>
@@ -58,19 +58,21 @@
             <table class="w-full text-left ">
                 <tbody>
                     <!-- Example Row -->
-                    <tr class="border-t hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold">Plastik</td>
-                        <td class="px-6 py-4">Organik</td>
-                        <td class="px-6 py-4">22/22/22</td>
-                    </tr>
+                    @foreach ($trash as $t)
+                        <tr class="border-t hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold capitalize">{{ $t->trash_name }}</td>
+                            <td class="px-6 py-4 capitalize">{{ $t->trash_type }}</td>
+                            <td class="px-6 py-4"> {{ \Carbon\Carbon::parse($t->created_at)->format('d F Y') }}</td>
+                        </tr>
+                    @endforeach
                     <!-- Repeat rows as necessary -->
                 </tbody>
             </table>
-            <a href="{{ url('/profile/activity') }}"><button
+            {{-- <a href="{{ url('/profile/activity') }}"><button
                     class="mt-3 text-sm font-semibold w-full text-center text-green-600 mb-2">Lihat
                     lain-nya
                     &gt;</button>
-            </a>
+            </a> --}}
         </section>
         <br>
         <br>

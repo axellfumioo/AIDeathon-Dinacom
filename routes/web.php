@@ -18,7 +18,7 @@ Route::middleware([CheckAuthenticated::class])->group(function () {
     Route::get('edu', [ViewController::class, 'edu'])->name('edu');
     Route::get('leaderboard', [ViewController::class, 'leaderboard'])->name('leaderboard');
     Route::get('community', [ViewController::class, 'community'])->name('community');
-    Route::get('trash', [ViewController::class, 'trash'])->name('trash');
+    Route::get('trash/{trashid}', [ViewController::class, 'trash'])->name('trash');
     Route::get('profile', [ViewController::class, 'profile'])->name('profile');
     Route::get('/scan', function () {
         return view('app.scan.index');

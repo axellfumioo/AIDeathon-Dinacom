@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Trash;
 use GuzzleHttp\Client;
 
 class ViewController extends Controller
@@ -38,14 +39,33 @@ class ViewController extends Controller
         $user = Auth::user();
         return View::make('app.community.index', ['user' => $user]);
     }
-    public function trash()
+    public function trash($trashid)
     {
+        // Mencari data berdasarkan ID di model Trash
+        $trash = Trash::where('trash_uuid', $trashid)->first();
+
+        // Jika data tidak ditemukan, kembalikan respon 404
+        if (!$trash) {
+            abort(404);
+        }
         $user = Auth::user();
-        return View::make('app.trash.index', ['user' => $user]);
+        return View::make('app.trash.index', ['user' => $user, 'trash' => $trash]);
     }
     public function profile()
     {
         $user = Auth::user();
-        return View::make('app.profile.index', ['user' => $user]);
+
+        if (!$user) {
+            // Handle case when no user is authenticated
+            return redirect()->route('login')->with('error', 'You need to log in to access your profile.');
+        }
+
+        $trash = Trash::where('user_id', $user->id)->get();
+
+        return view('app.profile.index', [
+            'user' => $user,
+            'trash' => $trash,
+        ]);
     }
+
 }
